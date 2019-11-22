@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "398785577237",
+    "firebase_url": "https://scrumproject-3cac4.firebaseio.com",
+    "project_id": "scrumproject-3cac4",
+    "storage_bucket": "scrumproject-3cac4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398785577237:android:c78d19ec796c538da7291c",
+        "android_client_info": {
+          "package_name": "com.example.scrumproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398785577237-be9ftfq6dea7vks7t6gvdcts2jm16p1k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.scrumproject",
+            "certificate_hash": "7ec5ede4c802977ab55a358effed247df0b3165d"
+          }
+        },
+        {
+          "client_id": "398785577237-t6jpliansd95gng9bsn232jmunae01kb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcp-TztL2wzYTqdsY1NujpgkDLyezlbjU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398785577237-t6jpliansd95gng9bsn232jmunae01kb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
