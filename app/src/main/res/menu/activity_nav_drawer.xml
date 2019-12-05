@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/ic_input_black_24dp"
+            android:title="Login" />
+        <item
+            android:id="@+id/nav_register"
+            android:icon="@drawable/ic_mode_edit_black_24dp"
+            android:title="Register" />
+
+        <item
+            android:id="@+id/nav_create_group"
+            android:icon="@drawable/ic_group_add_black_24dp"
+            android:title="Create group" />
+        <item
+            android:id="@+id/nav_create_question"
+            android:icon="@drawable/ic_assignment_black_24dp"
+            android:title="Create question" />
+        <item
+            android:id="@+id/nav_view_question"
+            android:icon="@drawable/ic_check_circle_black_24dp"
+            android:title="View question" />
+        <item android:title="User tasks">
+            <menu>
+                <item
+                    android:id="@+id/nav_join_group"
+                    android:icon="@drawable/ic_person_add_black_24dp"
+                    android:title="Join group" />
+                <item
+                    android:id="@+id/nav_join_question"
+                    android:icon="@drawable/ic_question_answer_black_24dp"
+                    android:title="Join question"/>
+
+        </menu>
+        </item>
+    </group>
+</menu>

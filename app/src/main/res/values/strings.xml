@@ -1,5 +1,20 @@
 <resources>
     <string name="app_name">scrumproject</string>
 
-   <!-- <string name="hello_blank_fragment">Hello blank fragment</string> -->
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="nav_header_title">Laszlo Gellert</string>
+    <string name="nav_header_subtitle">gellertlglaszlo@yahoo.com</string>
+
+    //Navigation
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="create_group">Create group</string>
+    <string name="create_question">Create question</string>
+    <string name="join_group">Create question</string>
+    <string name="view_question">Create question</string>
+
+    <!-- <string name="hello_blank_fragment">Hello blank fragment</string> -->
 </resources>
