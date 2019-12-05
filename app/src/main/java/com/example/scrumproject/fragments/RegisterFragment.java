@@ -1,41 +1,40 @@
 package com.example.scrumproject.fragments;
 
-
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.example.scrumproject.R;
-import com.example.scrumproject.Users;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterFragment extends Fragment {
 
-    EditText username;
+
     EditText email;
     EditText password;
     Button btn;
-
-    DatabaseReference databaseUsers;
+    FirebaseAuth mFirebaseAuth;
+    ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        //FirebaseApp.initializeApp(getActivity());
-        View FragmentUI = inflater.inflate(R.layout.fragment_register, container, false);
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(getActivity());
 
-        databaseUsers = FirebaseDatabase.getInstance().getReference("users");
-        username = FragmentUI.findViewById(R.id.username);
+        View FragmentUI = inflater.inflate(R.layout.fragment_register, container, false);
         email = FragmentUI.findViewById(R.id.email);
         password = FragmentUI.findViewById(R.id.password);
         btn = FragmentUI.findViewById(R.id.btn_create);
@@ -47,24 +46,42 @@ public class RegisterFragment extends Fragment {
                 addUser();
             }
         });
+        progressDialog.setMessage("Registering user");
 
         return FragmentUI;
     }
 
     private void addUser(){
-        String s_name = username.getText().toString().trim();
-        String s_email = email.getText().toString().trim();
-        String s_pass = password.getText().toString().trim();
+        String s_email = email.getText().toString();
+        String s_pass = password.getText().toString();
 
-        if( (!TextUtils.isEmpty(s_name)) ||(!TextUtils.isEmpty(s_email)) || !TextUtils.isEmpty(s_pass) )
+        if (s_email.isEmpty()){
+            email.setError("Enter email!");
+            email.requestFocus();
+        }else if(s_pass.isEmpty() )
         {
-            String id = databaseUsers.push().getKey();
-            Users user = new Users(id,s_name,s_email,s_pass);
-            databaseUsers.child(id).setValue(user);
-            Toast.makeText(getActivity(), "User created!", Toast.LENGTH_SHORT).show();
+            password.setError("Enter password");
+            password.requestFocus();
         }
-        else {
-            Toast.makeText(getActivity(), "Fill all the inputs", Toast.LENGTH_SHORT).show();
+        else if(s_email.isEmpty() && s_pass.isEmpty())
+        {
+            Toast.makeText(getActivity(), "Field are empty!", Toast.LENGTH_SHORT).show();
+        }
+        else if(!(s_email.isEmpty() && s_pass.isEmpty() ) )
+        {
+            mFirebaseAuth.createUserWithEmailAndPassword(s_email,s_pass)
+                    .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(!task.isSuccessful())
+                            {
+                                Toast.makeText(getActivity(), "You need a valid email address!", Toast.LENGTH_SHORT).show();
+                            }else
+                            {
+                                Toast.makeText(getActivity(), "User created!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
         }
     }
 
