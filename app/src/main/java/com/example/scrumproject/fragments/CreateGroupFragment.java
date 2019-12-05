@@ -3,6 +3,7 @@ package com.example.scrumproject.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
@@ -16,8 +17,11 @@ import android.widget.Toast;
 import com.example.scrumproject.Groups;
 import com.example.scrumproject.R;
 import com.example.scrumproject.Users;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -27,38 +31,43 @@ public class CreateGroupFragment extends Fragment {
 
     EditText name;
     Button btn;
-    DatabaseReference databaseGroups;
+    FirebaseDatabase database;
+    DatabaseReference ref;
+    Groups groups;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View FragmentUI = inflater.inflate(R.layout.fragment_create_group, container, false);
 
-        databaseGroups = FirebaseDatabase.getInstance().getReference("groups");
         name = FragmentUI.findViewById(R.id.editText);
         btn = FragmentUI.findViewById(R.id.button);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addGroup();
-            }
-        });
+        ref = database.getReference("groups");
+       // groups = new Groups();
         return FragmentUI;
     }
 
-    private void addGroup()
-    {
-        String s_name = name.getText().toString().trim();
 
-        if(!TextUtils.isEmpty(s_name)){
-            String id = databaseGroups.push().getKey();
-            Users A=new Users();
-            Groups group = new Groups(id,s_name,A);
-            databaseGroups.child(id).setValue(group);
-            Toast.makeText(getActivity(), "Group created!", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(getActivity(), "Fill all the inputs", Toast.LENGTH_SHORT).show();
-        }
+    public void getValues()
+    {
+        groups.setName(name.getText().toString());
+        //groups.setUser();
     }
+
+
+
+    public void btnInsert(View view){
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
 }

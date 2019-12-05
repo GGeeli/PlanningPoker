@@ -1,15 +1,17 @@
 package com.example.scrumproject;
 
+
 import java.util.List;
 
 public class Groups {
-    String id;
-    String name;
-    Users user;
+    private String id;
+    private String name;
+    private List<Users> user;
 
-    private Groups(){}
+    private Groups() {
+    }
 
-    public Groups(String id,String name, Users user) {
+    public Groups(String id, String name, List<Users> user) {
         this.id = id;
         this.name = name;
         this.user = user;
@@ -18,8 +20,24 @@ public class Groups {
     public String getId() {
         return id;
     }
-    public String getName(){return name;}
-    public Users getUsers() {
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Users> getUser() {
         return user;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUser(List<Users> user) {
+        this.user = user;
     }
 }
