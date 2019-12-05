@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF0B2792"
-    tools:context=".Register">
+    android:background="#00FFFFFF"
+    tools:context=".fragments.RegisterFragment">
 
 
     <EditText

@@ -1,5 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_drawer">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_drawer"
+    app:startDestination="@id/nav_login">
 
+    <fragment
+        android:id="@id/nav_login"
+        android:name="com.example.scrumproject.fragments.LoginFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@id/nav_register"
+        android:name="com.example.scrumproject.fragments.RegisterFragment"
+        android:label="@string/register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@id/nav_create_group"
+        android:name="com.example.scrumproject.fragments.CreateGroupFragment"
+        android:label="@string/create_group"
+        tools:layout="@layout/fragment_create_group" />
+    <fragment
+        android:id="@id/nav_create_question"
+        android:name="com.example.scrumproject.fragments.CreateQuestionFragment"
+        android:label="@string/create_question"
+        tools:layout="@layout/fragment_create_question" />
+    <fragment
+        android:id="@id/nav_view_question"
+        android:name="com.example.scrumproject.fragments.ViewQuestionFragment"
+        android:label="@string/view_question"
+        tools:layout="@layout/fragment_view_question" />
+    <fragment
+        android:id="@id/nav_join_group"
+        android:name="com.example.scrumproject.fragments.JoinGroupFragment"
+        android:label="@string/join_group"
+        tools:layout="@layout/fragment_join_group" />
+    <fragment
+        android:id="@id/nav_join_question"
+        android:name="com.example.scrumproject.fragments.JoinQuestionFragment"
+        android:label="@string/join_question"
+        tools:layout="@layout/fragment_join_question" />
 </navigation>
