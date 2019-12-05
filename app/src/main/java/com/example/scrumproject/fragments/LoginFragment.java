@@ -36,8 +36,6 @@ public class LoginFragment extends Fragment {
         password = FragmentUI.findViewById(R.id.edit_password);
         btn = FragmentUI.findViewById(R.id.btn_login);
 
-
-
         mFirebaseAuth = FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
