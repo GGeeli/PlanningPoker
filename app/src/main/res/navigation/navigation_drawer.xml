@@ -3,18 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_drawer"
-    app:startDestination="@id/nav_login">
+    app:startDestination="@id/nav_home">
 
     <fragment
-        android:id="@id/nav_login"
-        android:name="com.example.scrumproject.fragments.LoginFragment"
-        android:label="@string/login"
-        tools:layout="@layout/fragment_login" />
-    <fragment
-        android:id="@id/nav_register"
-        android:name="com.example.scrumproject.fragments.RegisterFragment"
-        android:label="@string/register"
-        tools:layout="@layout/fragment_register" />
+        android:id="@id/nav_home"
+        android:name="com.example.scrumproject.fragments.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@id/nav_create_group"
         android:name="com.example.scrumproject.fragments.CreateGroupFragment"

@@ -32,8 +32,7 @@ public class NavigationDrawerActivity extends AppCompatActivity {
             drawerLayout = findViewById(R.id.drawer_layout);
 
             final Set<Integer> topLevelDestinations = new ArraySet<>();
-            topLevelDestinations.add(R.id.nav_login);
-            topLevelDestinations.add(R.id.nav_register);
+            topLevelDestinations.add(R.id.nav_home);
             topLevelDestinations.add(R.id.nav_create_group);
             topLevelDestinations.add(R.id.nav_create_question);
             topLevelDestinations.add(R.id.nav_view_question);

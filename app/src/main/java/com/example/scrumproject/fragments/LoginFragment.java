@@ -1,10 +1,12 @@
 package com.example.scrumproject.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.scrumproject.MainActivity;
+import com.example.scrumproject.NavigationDrawerActivity;
 import com.example.scrumproject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,7 +28,7 @@ public class LoginFragment extends Fragment {
 
     EditText email;
     EditText password;
-    Button btn;
+    Button btn,btn_reg;
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -35,8 +39,10 @@ public class LoginFragment extends Fragment {
         email = FragmentUI.findViewById(R.id.edit_name);
         password = FragmentUI.findViewById(R.id.edit_password);
         btn = FragmentUI.findViewById(R.id.btn_login);
+        btn_reg = FragmentUI.findViewById(R.id.button2);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
+
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -54,7 +60,19 @@ public class LoginFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Login();
+                Intent intent = new Intent(getContext(),NavigationDrawerActivity.class);
+                startActivity(intent);
+                //Login();
+            }
+        });
+
+        btn_reg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, new RegisterFragment());
+                fragmentTransaction.commit();
+
             }
         });
 
@@ -88,6 +106,8 @@ public class LoginFragment extends Fragment {
                     } else
                     {
                         Toast.makeText(getActivity(), "Login Successful!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getContext(),NavigationDrawerActivity.class);
+                        startActivity(intent);
                     }
                 }
             });

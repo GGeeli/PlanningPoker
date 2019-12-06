@@ -1,4 +1,4 @@
-package com.example.scrumproject;
+package com.example.scrumproject.Database;
 
 public class Question {
     String id;

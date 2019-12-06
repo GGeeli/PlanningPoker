@@ -6,24 +6,19 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.scrumproject.Groups;
+import com.example.scrumproject.Database.Groups;
 import com.example.scrumproject.R;
-import com.example.scrumproject.Users;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.List;
 
 
 public class CreateGroupFragment extends Fragment {
@@ -45,29 +40,5 @@ public class CreateGroupFragment extends Fragment {
        // groups = new Groups();
         return FragmentUI;
     }
-
-
-    public void getValues()
-    {
-        groups.setName(name.getText().toString());
-        //groups.setUser();
-    }
-
-
-
-    public void btnInsert(View view){
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
 
 }
