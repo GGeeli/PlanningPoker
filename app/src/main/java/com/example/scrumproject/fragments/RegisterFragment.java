@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.example.scrumproject.Database.UserRight;
 import com.example.scrumproject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,6 +26,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static android.content.ContentValues.TAG;
 
@@ -34,7 +41,9 @@ public class RegisterFragment extends Fragment {
     Button btn;
     FirebaseAuth mFirebaseAuth;
     ProgressDialog progressDialog;
-
+    UserRight userRight;
+    DatabaseReference reff;
+    long maxId = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -98,6 +107,28 @@ public class RegisterFragment extends Fragment {
                                                 Log.d(TAG,"Username updated");
                                             }
                                         });
+
+                                userRight = new UserRight();
+                                boolean isAdmin = false;
+                                reff = FirebaseDatabase.getInstance().getReference().child("UserRight");
+                                reff.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if(dataSnapshot.exists())
+                                            maxId = (dataSnapshot.getChildrenCount());
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                                String current_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                userRight.setUserId(current_user);
+                                userRight.setAdmin(isAdmin);
+
+                                reff.child(String.valueOf(maxId)).setValue(userRight);
 
                                 Toast.makeText(getActivity(), "User created!", Toast.LENGTH_SHORT).show();
                                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
