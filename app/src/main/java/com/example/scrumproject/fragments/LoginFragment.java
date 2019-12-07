@@ -60,9 +60,7 @@ public class LoginFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),NavigationDrawerActivity.class);
-                startActivity(intent);
-                //Login();
+                Login();
             }
         });
 
@@ -92,11 +90,7 @@ public class LoginFragment extends Fragment {
             password.setError("Enter password");
             password.requestFocus();
         }
-        else if(s_email.isEmpty() && s_pass.isEmpty())
-        {
-            Toast.makeText(getActivity(), "Field are empty!", Toast.LENGTH_SHORT).show();
-        }
-        else if(!(s_email.isEmpty() && s_pass.isEmpty() ) )
+        else if(!(email.getText().toString().equals("") && password.getText().toString().equals("") ))
         {
             mFirebaseAuth.signInWithEmailAndPassword(s_email,s_pass).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                 @Override

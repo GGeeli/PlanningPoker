@@ -40,16 +40,12 @@ public class RegisterFragment extends Fragment {
     EditText email,password,username;
     Button btn;
     FirebaseAuth mFirebaseAuth;
-    ProgressDialog progressDialog;
-    UserRight userRight;
     DatabaseReference reff;
-    long maxId = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-        progressDialog = new ProgressDialog(getActivity());
-
         View FragmentUI = inflater.inflate(R.layout.fragment_register, container, false);
         email = FragmentUI.findViewById(R.id.email);
         password = FragmentUI.findViewById(R.id.password);
@@ -63,7 +59,6 @@ public class RegisterFragment extends Fragment {
                 addUser();
             }
         });
-        progressDialog.setMessage("Registering user");
 
         return FragmentUI;
     }
@@ -108,27 +103,19 @@ public class RegisterFragment extends Fragment {
                                             }
                                         });
 
-                                userRight = new UserRight();
-                                boolean isAdmin = false;
-                                reff = FirebaseDatabase.getInstance().getReference().child("UserRight");
-                                reff.addValueEventListener(new ValueEventListener() {
+                                UserRight userRight = new UserRight();
+                                FirebaseDatabase.getInstance().getReference("UserRight")
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .setValue(userRight).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        if(dataSnapshot.exists())
-                                            maxId = (dataSnapshot.getChildrenCount());
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Log.d(TAG,"node created");
+                                        }else{
+                                            Log.d(TAG,"node not created");
+                                        }
                                     }
                                 });
-
-                                String current_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                userRight.setUserId(current_user);
-                                userRight.setAdmin(isAdmin);
-
-                                reff.child(String.valueOf(maxId)).setValue(userRight);
 
                                 Toast.makeText(getActivity(), "User created!", Toast.LENGTH_SHORT).show();
                                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
